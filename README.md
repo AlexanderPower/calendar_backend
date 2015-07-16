@@ -32,3 +32,4 @@ app.factory('AuthInterceptor', function($q, $injector) {
   };
 });
 ```
+К запросам на адреса /register /login токен добавлять не надо.
