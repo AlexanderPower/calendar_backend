@@ -1,0 +1,10 @@
+curl --data "user=foo&pass=2221" localhost:4567/register
+
+curl "localhost:4567/register?email=foo&password=2221"
+
+curl -H "Content-Type: application/json" -X POST -d '{"email":"foo","password":"2221"}' localhost:4567/register
+
+curl -i -H "Accept: application/json" "localhost:4567/login.json{"email":"foo","password":"2221"}"
+
+curl --header "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiNTVhN2E1MTg3NDY5Njc1NGViMDAwMDA4In0.Z6VtA_x1BfrJ-FsiiE9Gnh_F6ViHSly5gQ6Q_LIk9s4" localhost:4567/user
+

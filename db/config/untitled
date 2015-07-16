@@ -1,0 +1,6 @@
+development:
+  sessions:
+    default:
+      database: jwt-tut
+      hosts:
+        - localhost:27017
