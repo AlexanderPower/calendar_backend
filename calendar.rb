@@ -92,4 +92,57 @@ get '/user' do
   json @current_user
 end
 
+# all tasks
+get '/tasks' do
+  @current_user.tasks.to_json
+end
+
+# CREATE
+post '/tasks' do
+  task = @current_user.tasks.build(params)
+
+  if task.save
+    task.to_json
+  else
+    json errors: task.errors
+  end
+end
+
+# READ
+get '/tasks/:id' do
+  task = Task.find(params[:id])
+
+  if @current_user.tasks.include? task
+    task.to_json
+  else
+    halt 401
+  end
+end
+
+# UPDATE
+put '/tasks/:id' do
+  task = Task.find(params[:id])
+  
+  halt 401 unless @current_user.tasks.include? task
+  
+  if task.update(params)
+    task.to_json
+  else
+    json errors: task.errors
+  end
+end
+
+# DELETE
+delete '/tasks/:id/delete' do
+  task = Task.find(params[:id])
+  
+  halt 401 unless @current_user.tasks.include? task
+
+  if task.destroy
+    {:success => "ok"}.to_json
+  else
+    json errors: task.errors
+  end
+end
+
 
